@@ -30,7 +30,7 @@
 
 .resource-card {
   background-color: var(--bg-secondary, #1e1e1e);
-  border-radius: 12px;
+  border-radius: 1px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -130,7 +130,7 @@
 }
 
 .info-chip {
-  background-color: var(--gray-dark, #333333);
+  background-color: transparent;
   color: var(--text-primary, #ffffff);
   padding: 0.5rem 1rem;
   border-radius: 20px;
