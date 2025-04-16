@@ -120,7 +120,7 @@ const CpuGauge = ({ value, frequency }) => {
         {/* Frequency Markers */}
         {[0, 25, 50, 75, 100].map((mark, i) => {
           const angle = -90 + (mark * 3.6);
-          const x = centerX + (frequencyRadius + 6) * Math.cos(angle * Math.PI / 180);
+          const x = centerX + (frequencyRadius + 9) * Math.cos(angle * Math.PI / 180);
           const y = centerY + (frequencyRadius + 6) * Math.sin(angle * Math.PI / 180);
           
           return (
@@ -134,7 +134,7 @@ const CpuGauge = ({ value, frequency }) => {
               textAnchor="middle"
               dominantBaseline="middle"
             >
-              {mark === 0 ? '0' : mark === 100 ? '5.0GHz' : `${mark/20}GHz`}
+              {mark === 0 ? '0' : mark === 100 ? '' : `${mark/20}GHz`}
             </text>
           );
         })}
