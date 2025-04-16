@@ -18,11 +18,6 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
 
 ---
 
-## 🖼️ Interface Preview
-
-![System Monitor Dashboard](./e98cacf6-8284-4d40-9360-525295d964cf.png)
-
----
 
 ## 👨‍💻 Group Members
 
@@ -31,20 +26,4 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
 - Ooi Wei Sian  
 - Lin Chong Hui  
 
----
 
-## ⚙️ Tech Stack
-
-- **Frontend:** HTML, CSS, JavaScript (Optional: React)
-- **Backend:** Node.js (Optional: Express)
-- **System Data:** `systeminformation` npm package
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/system-monitor.git
-cd system-monitor
