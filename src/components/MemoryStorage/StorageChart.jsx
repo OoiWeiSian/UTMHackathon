@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MemoryStorage.css';
 
 const StorageChart = ({ used, total, color }) => {
-  const percentage = (used / total) * 100;
+  const [animatedPercentage, setAnimatedPercentage] = useState(0);
+  
+  useEffect(() => {
+    const newPercentage = (used / total) * 100;
+    const animationDuration = 800; // ms
+    
+    let start = null;
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / animationDuration, 1);
+      setAnimatedPercentage(progress * newPercentage);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }, [used, total]);
+
   const circumference = 2 * Math.PI * 40;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const strokeDashoffset = circumference - (animatedPercentage / 100) * circumference;
 
   return (
     <div className="storage-chart">
@@ -15,7 +34,7 @@ const StorageChart = ({ used, total, color }) => {
           cy="50"
           r="40"
           fill="none"
-          stroke="#e9ecef"
+          stroke="#333333"
           strokeWidth="8"
         />
         <circle
@@ -38,7 +57,7 @@ const StorageChart = ({ used, total, color }) => {
           dominantBaseline="middle"
           className="chart-text"
         >
-          {Math.round(percentage)}%
+          {Math.round(animatedPercentage)}%
         </text>
       </svg>
     </div>
