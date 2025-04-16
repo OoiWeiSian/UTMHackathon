@@ -174,7 +174,7 @@ body {
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  background-color: var(--bg-hover);
+  background-color: transparent;
 }
 
 .stat-header {
