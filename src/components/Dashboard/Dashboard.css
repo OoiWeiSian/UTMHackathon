@@ -1,51 +1,455 @@
-.dashboard {
-    font-family: Arial, sans-serif;
-    color: #f8f9fa;
-    padding: 2rem;
-    background-color: #121212;
+.dashboard-container {
+    padding: 1.5rem;
+    height: 100%;
+    overflow-y: auto;
   }
   
-  header {
-    text-align: center;
-    margin-bottom: 2rem;
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
   }
   
-  h1 {
-    font-size: 2.5rem;
-    color: #4361ee;
+  .dashboard-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--heading-color, #333);
+    margin: 0;
   }
   
-  p {
-    font-size: 1.1rem;
-    color: #adb5bd;
+  .dashboard-stats {
+    display: flex;
+    gap: 1.5rem;
   }
   
-  .tabs {
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #6c757d);
+    font-weight: 500;
+  }
+  
+  .stat-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .status-healthy {
+    color: var(--success-color, #28a745);
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  .widget {
+    background-color: var(--card-bg, #fff);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+  }
+  
+  .widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+  
+  .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.25rem;
+    background-color: var(--card-header-bg, rgba(0, 0, 0, 0.02));
+    border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+  }
+  
+  .widget-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--heading-color, #333);
+    display: flex;
+    align-items: center;
+  }
+  
+  .widget-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.75;
+  }
+  
+  .cpu-icon::before {
+    content: '💻';
+  }
+  
+  .memory-icon::before {
+    content: '🧠';
+  }
+  
+  .fan-icon::before {
+    content: '🌀';
+  }
+  
+  .storage-icon::before {
+    content: '💾';
+  }
+  
+  .network-icon::before {
+    content: '🌐';
+  }
+  
+  .health-icon::before {
+    content: '🔋';
+  }
+  
+  .widget-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 16px;
+    background-color: var(--primary-color-light, rgba(13, 110, 253, 0.1));
+    color: var(--primary-color, #0d6efd);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .widget-content {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .progress-container {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: var(--progress-bg, #e9ecef);
+    border-radius: 4px;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-fill.normal {
+    background-color: var(--primary-color, #0d6efd);
+  }
+  
+  .progress-fill.warning {
+    background-color: var(--warning-color, #ffc107);
+  }
+  
+  .progress-fill.critical {
+    background-color: var(--danger-color, #dc3545);
+  }
+  
+  .progress-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary, #6c757d);
+    white-space: nowrap;
+  }
+  
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  
+  .metric {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    padding: 0.6rem;
+    background-color: var(--metric-bg, rgba(0, 0, 0, 0.02));
+  }
+  
+  .metric-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary, #6c757d);
+    margin-bottom: 0.25rem;
+  }
+  
+  .metric-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary, #212529);
+  }
+  
+  .memory-chart {
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1rem 0;
+    display: flex;
+  }
+  
+  .chart-segment {
+    height: 100%;
+  }
+  
+  .chart-segment.used {
+    background-color: var(--primary-color, #0d6efd);
+  }
+  
+  .chart-segment.free {
+    background-color: var(--light-bg, #e9ecef);
+  }
+  
+  .chart-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #6c757d);
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .legend-color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  
+  .legend-color.used {
+    background-color: var(--primary-color, #0d6efd);
+  }
+  
+  .legend-color.free {
+    background-color: var(--light-bg, #e9ecef);
+  }
+  
+  .fan-speed-container {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
-  .tab {
-    padding: 1rem 2rem;
-    background-color: #3f37c9;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  .fan-speed-gauge {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--primary-color, #0d6efd) 0%,
+      var(--primary-color-light, rgba(13, 110, 253, 0.1)) 60%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
   
-  .tab:hover {
-    background-color: #4361ee;
+  .fan-speed-gauge::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: var(--card-bg, #fff);
+    border-radius: 50%;
   }
   
-  .tab.active {
-    background-color: #2b2d42;
+  .gauge-value, .gauge-label {
+    position: relative;
+    z-index: 1;
   }
   
-  .tab-content {
-    margin-top: 2rem;
+  .gauge-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary, #212529);
   }
   
+  .gauge-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #6c757d);
+  }
+  
+  .storage-device {
+    margin-bottom: 1rem;
+  }
+  
+  .storage-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .device-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .device-capacity {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #6c757d);
+  }
+  
+  .network-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .network-stat {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: var(--metric-bg, rgba(0, 0, 0, 0.02));
+  }
+  
+  .network-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary, #212529);
+  }
+  
+  .network-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #6c757d);
+  }
+  
+  .network-direction {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  
+  .health-indicators {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .health-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--metric-bg, rgba(0, 0, 0, 0.02));
+    border-radius: 6px;
+  }
+  
+  .health-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .health-icon.health-ok {
+    background-color: var(--success-color, #28a745);
+    box-shadow: 0 0 5px var(--success-color, #28a745);
+  }
+  
+  .health-icon.health-warning {
+    background-color: var(--warning-color, #ffc107);
+    box-shadow: 0 0 5px var(--warning-color, #ffc107);
+  }
+  
+  .health-icon.health-critical {
+    background-color: var(--danger-color, #dc3545);
+    box-shadow: 0 0 5px var(--danger-color, #dc3545);
+  }
+  
+  .health-label {
+    font-size: 0.8rem;
+  }
+  
+  .last-check {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary, #6c757d);
+    margin-top: auto;
+  }
+  
+  /* Add these CSS variables to your root/theme CSS */
+  :root {
+    --primary-color: #0d6efd;
+    --primary-color-light: rgba(13, 110, 253, 0.1);
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: rgba(0, 0, 0, 0.05);
+    --card-bg: #fff;
+    --card-header-bg: rgba(0, 0, 0, 0.02);
+    --metric-bg: rgba(0, 0, 0, 0.02);
+    --progress-bg: #e9ecef;
+    --light-bg: #e9ecef;
+    --heading-color: #333;
+  }
+  
+  /* Dark theme variables (can be toggled with your ThemeProvider) */
+  [data-theme="dark"] {
+    --primary-color: #3d8bfd;
+    --primary-color-light: rgba(61, 139, 253, 0.15);
+    --success-color: #2fb344;
+    --warning-color: #f7c32e;
+    --danger-color: #e35d6a;
+    --text-primary: #e9ecef;
+    --text-secondary: #9ca3af;
+    --border-color: rgba(255, 255, 255, 0.05);
+    --card-bg: #1f2937;
+    --card-header-bg: rgba(0, 0, 0, 0.2);
+    --metric-bg: rgba(0, 0, 0, 0.2);
+    --progress-bg: #374151;
+    --light-bg: #374151;
+    --heading-color: #f3f4f6;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .dashboard-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .metric-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-stats {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+  }
