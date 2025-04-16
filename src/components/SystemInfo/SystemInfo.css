@@ -1,0 +1,21 @@
+.system-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  
+  .info-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+  }
+  
+  .info-value {
+    font-weight: 500;
+  }

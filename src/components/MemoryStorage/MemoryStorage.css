@@ -1,0 +1,111 @@
+.memory-storage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .memory-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+  }
+  
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .resource-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .resource-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .storage-chart {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chart-background {
+    transition: stroke 0.3s;
+  }
+  
+  .chart-progress {
+    transition: stroke-dashoffset 1s ease-out;
+  }
+  
+  .chart-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    fill: var(--text-primary);
+  }
+  
+  .resource-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .detail-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+  }
+  
+  .detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .system-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .info-chip {
+    background-color: var(--gray-light);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .resource-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .resource-details {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
