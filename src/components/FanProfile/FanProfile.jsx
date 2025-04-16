@@ -1,5 +1,4 @@
-// FanProfile.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './FanProfile.css';
 
 // If you're using React with icons, you'd import them here:
@@ -12,6 +11,11 @@ const FanProfile = () => {
     primary: '#3b82f6',
     success: '#10b981'
   });
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [fanPercentage, setFanPercentage] = useState(0);
+  const [fanStatus, setFanStatus] = useState('');
+  const progressBarRef = useRef(null);
 
   // Monitor for theme changes
   useEffect(() => {
@@ -138,6 +142,31 @@ const FanProfile = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Effect to run when success message is shown
+  useEffect(() => {
+    if (showSuccess && progressBarRef.current) {
+      progressBarRef.current.style.width = '100%';
+      
+      const progressAnimation = progressBarRef.current.animate(
+        [
+          { width: '100%' },
+          { width: '0%' }
+        ],
+        {
+          duration: 4000,
+          easing: 'linear',
+          fill: 'forwards'
+        }
+      );
+      
+      progressAnimation.onfinish = () => {
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = '0%';
+        }
+      };
+    }
+  }, [showSuccess]);
+
   // Icon components (replace with your preferred icon library or use SVGs)
   const Icons = {
     Settings: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>,
@@ -146,7 +175,8 @@ const FanProfile = () => {
     Activity: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>,
     Zap: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>,
     ChevronRight: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>,
-    Clock: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    Clock: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>,
+    CheckCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
   };
 
   const fanModes = [
@@ -215,6 +245,52 @@ const FanProfile = () => {
   const handleModeSelect = (modeId) => {
     setSelectedMode(modeId);
     setShowSettings(true);
+  };
+
+  const applySettings = () => {
+    // Show fan animation with loading sequence
+    setShowAnimation(true);
+    setFanStatus('Initializing fan profile...');
+    
+    // Animation sequence
+    const selectedModeData = fanModes.find(mode => mode.id === selectedMode);
+    const targetSpeed = selectedModeData.settings.maxSpeed;
+    
+    // Step 1: Start percentage counter
+    let count = 0;
+    const interval = setInterval(() => {
+      count += 1;
+      setFanPercentage(count);
+      
+      // Update status message at different points
+      if (count === 20) {
+        setFanStatus('Adjusting fan curves...');
+      } else if (count === 40) {
+        setFanStatus('Optimizing power settings...');
+      } else if (count === 70) {
+        setFanStatus('Applying thermal configuration...');
+      } else if (count === 85) {
+        setFanStatus('Setting performance parameters...');
+      } else if (count === 95) {
+        setFanStatus('Finalizing profile...');
+      }
+      
+      if (count >= 100) {
+        clearInterval(interval);
+        
+        // Short delay before hiding animation
+        setTimeout(() => {
+          setShowAnimation(false);
+          setFanPercentage(0);
+          setShowSuccess(true);
+          
+          // Hide success message after 4 seconds
+          setTimeout(() => {
+            setShowSuccess(false);
+          }, 4000);
+        }, 500);
+      }
+    }, 30);
   };
 
   const selectedModeData = fanModes.find(mode => mode.id === selectedMode);
@@ -362,12 +438,47 @@ const FanProfile = () => {
             <button 
               className="button button-apply"
               style={{ backgroundColor: selectedModeData.color }}
+              onClick={applySettings}
             >
               Apply Settings
             </button>
           </div>
         </div>
       )}
+
+      {/* Enhanced Professional Fan Animation Overlay */}
+      <div className={`fan-animation-container ${showAnimation ? 'show' : ''}`}>
+        <div className="fan-animation-wrapper">
+          <div className={`fan-animation fan-spinning`} style={{ color: selectedModeData?.color || currentTheme.primary }}>
+            <div className="fan-outer-ring"></div>
+            <div className="fan-inner-ring"></div>
+            <div className="fan-glow" style={{ boxShadow: `0 0 30px ${selectedModeData?.color || currentTheme.primary}50` }}></div>
+            <div className="fan-blade"></div>
+            <div className="fan-blade"></div>
+            <div className="fan-blade"></div>
+            <div className="fan-blade"></div>
+            <div className="fan-blade"></div>
+            <div className="fan-circle"></div>
+            <div className="fan-center-dot"></div>
+            <div className="fan-percentage">{fanPercentage}%</div>
+          </div>
+          <div className="fan-status">{fanStatus}</div>
+        </div>
+      </div>
+
+      {/* Enhanced Success Message */}
+      <div className={`success-message ${showSuccess ? 'show' : ''}`} style={{ backgroundColor: currentTheme.success }}>
+        <div className="success-icon">
+          <Icons.CheckCircle />
+        </div>
+        <div className="success-content">
+          <h4 className="success-title">Settings Applied</h4>
+          <p className="success-description">{selectedModeData?.name} profile activated successfully</p>
+        </div>
+        <div className="success-progress">
+          <div className="success-progress-bar" ref={progressBarRef}></div>
+        </div>
+      </div>
     </div>
   );
 };
