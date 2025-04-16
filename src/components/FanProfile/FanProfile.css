@@ -200,7 +200,7 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   align-items: center;
   padding: 0.75rem;
-  background-color: var(--card-bg, white);
+  background-color: transparent;
   border: 1px solid var(--border-color, #e5e7eb);
   border-radius: 8px;
   transition: background-color 0.3s ease;

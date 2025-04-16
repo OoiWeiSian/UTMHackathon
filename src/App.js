@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import FanProfile from './components/FanProfile/FanProfile';
-import CpuLoad from './components/CpuLoad/CpuPerformanceMonitor';
+import CpuLoad from './components/CpuLoad/CpuLoad';
 import MemoryStorage from './components/MemoryStorage/MemoryStorage';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import './App.css';

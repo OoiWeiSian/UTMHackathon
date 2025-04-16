@@ -1,0 +1,51 @@
+.dashboard {
+    font-family: Arial, sans-serif;
+    color: #f8f9fa;
+    padding: 2rem;
+    background-color: #121212;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #4361ee;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: #adb5bd;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tab {
+    padding: 1rem 2rem;
+    background-color: #3f37c9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .tab:hover {
+    background-color: #4361ee;
+  }
+  
+  .tab.active {
+    background-color: #2b2d42;
+  }
+  
+  .tab-content {
+    margin-top: 2rem;
+  }
+  

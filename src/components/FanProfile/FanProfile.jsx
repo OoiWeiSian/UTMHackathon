@@ -7,7 +7,7 @@ import './FanProfile.css';
 const FanProfile = () => {
   const [selectedMode, setSelectedMode] = useState('standard');
   const [showSettings, setShowSettings] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState({
+  const [currentTheme] = useState({
     primary: '#3b82f6',
     success: '#10b981'
   });
@@ -16,131 +16,6 @@ const FanProfile = () => {
   const [fanPercentage, setFanPercentage] = useState(0);
   const [fanStatus, setFanStatus] = useState('');
   const progressBarRef = useRef(null);
-
-  // Monitor for theme changes
-  useEffect(() => {
-    // Function to detect and apply theme colors
-    const detectThemeColors = () => {
-      // Get computed styles of the document
-      const computedStyle = getComputedStyle(document.documentElement);
-      
-      // Check for theme CSS variables
-      const primaryColor = computedStyle.getPropertyValue('--primary-color') || 
-                          computedStyle.getPropertyValue('--primary') || 
-                          '#3b82f6';
-                          
-      const successColor = computedStyle.getPropertyValue('--success-color') || 
-                          computedStyle.getPropertyValue('--success') || 
-                          '#10b981';
-                          
-      const backgroundColor = computedStyle.getPropertyValue('--bg-primary') || 
-                            computedStyle.getPropertyValue('--background') || 
-                            null;
-                            
-      const textColor = computedStyle.getPropertyValue('--text-primary') || 
-                      computedStyle.getPropertyValue('--text') || 
-                      null;
-
-      // Update theme state
-      setCurrentTheme({
-        primary: primaryColor.trim(),
-        success: successColor.trim(),
-        background: backgroundColor?.trim(),
-        text: textColor?.trim()
-      });
-      
-      // Apply theme variables to document if not already set
-      if (!computedStyle.getPropertyValue('--primary-color')) {
-        document.documentElement.style.setProperty('--primary-color', primaryColor);
-        document.documentElement.style.setProperty('--success-color', successColor);
-      }
-      
-      // Set dark/light mode variables based on detected background
-      if (backgroundColor) {
-        // Convert to RGB to determine if it's dark or light
-        const rgb = hexToRgb(backgroundColor) || { r: 255, g: 255, b: 255 };
-        const isDark = (rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114) < 186;
-        
-        if (isDark) {
-          document.documentElement.style.setProperty('--bg-primary', backgroundColor);
-          document.documentElement.style.setProperty('--bg-secondary', adjustColor(backgroundColor, 20));
-          document.documentElement.style.setProperty('--text-primary', '#f9fafb');
-          document.documentElement.style.setProperty('--text-secondary', '#9ca3af');
-          document.documentElement.style.setProperty('--border-color', '#374151');
-          document.documentElement.style.setProperty('--card-bg', adjustColor(backgroundColor, 10));
-          document.documentElement.style.setProperty('--slider-bg', '#4b5563');
-        } else {
-          document.documentElement.style.setProperty('--bg-primary', backgroundColor);
-          document.documentElement.style.setProperty('--bg-secondary', adjustColor(backgroundColor, -10));
-          document.documentElement.style.setProperty('--text-primary', '#1f2937');
-          document.documentElement.style.setProperty('--text-secondary', '#6b7280');
-          document.documentElement.style.setProperty('--border-color', '#e5e7eb');
-          document.documentElement.style.setProperty('--card-bg', '#ffffff');
-          document.documentElement.style.setProperty('--slider-bg', '#e5e7eb');
-        }
-      }
-    };
-
-    // Convert hex to RGB for color calculations
-    const hexToRgb = (hex) => {
-      if (!hex) return null;
-      
-      // Remove # if present
-      hex = hex.replace(/^#/, '');
-      
-      // Parse hex values
-      if (hex.length === 3) {
-        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-      }
-      
-      const r = parseInt(hex.substring(0, 2), 16);
-      const g = parseInt(hex.substring(2, 4), 16);
-      const b = parseInt(hex.substring(4, 6), 16);
-      
-      return { r, g, b };
-    };
-    
-    // Adjust color lightness/darkness
-    const adjustColor = (color, amount) => {
-      if (!color) return color;
-      
-      // Convert to RGB
-      const rgb = hexToRgb(color.replace(/^#/, ''));
-      if (!rgb) return color;
-      
-      // Adjust RGB values
-      let { r, g, b } = rgb;
-      r = Math.max(0, Math.min(255, r + amount));
-      g = Math.max(0, Math.min(255, g + amount));
-      b = Math.max(0, Math.min(255, b + amount));
-      
-      // Convert back to hex
-      return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-    };
-
-    // Initial theme detection
-    detectThemeColors();
-    
-    // Setup a MutationObserver to watch for theme changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class' || 
-            mutation.attributeName === 'data-theme' || 
-            mutation.type === 'attributes') {
-          detectThemeColors();
-        }
-      });
-    });
-    
-    // Start observing the document and html element for class/attribute changes
-    observer.observe(document.documentElement, { 
-      attributes: true,
-      attributeFilter: ['class', 'data-theme', 'style']
-    });
-    
-    // Cleanup observer on component unmount
-    return () => observer.disconnect();
-  }, []);
 
   // Effect to run when success message is shown
   useEffect(() => {
@@ -460,7 +335,23 @@ const FanProfile = () => {
             <div className="fan-blade"></div>
             <div className="fan-circle"></div>
             <div className="fan-center-dot"></div>
-            <div className="fan-percentage">{fanPercentage}%</div>
+            {/* Use inline styling to ensure percentage text always displays in black */}
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 5,
+              color: 'black',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              textShadow: '0 0 5px rgba(255, 255, 255, 0.7)',
+              opacity: 0,
+              transition: 'opacity 0.5s ease',
+              ...(showAnimation ? { opacity: 1 } : {})
+            }}>
+              {fanPercentage}%
+            </div>
           </div>
           <div className="fan-status">{fanStatus}</div>
         </div>
