@@ -1,0 +1,358 @@
+:root {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #38bdf8;
+    --accent: #8b5cf6;
+    --border-color: #374151;
+  }
+  
+  /* Main Container */
+  .cpu-monitor {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  .monitor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .monitor-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+  }
+  
+  .monitor-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0 0;
+  }
+  
+  .live-indicator {
+    background-color: rgba(59, 130, 246, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+  
+  .live-indicator span {
+    color: var(--primary-light);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  /* Grid Layouts */
+  .monitor-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Gauge Styles */
+  .usage-gauge-container {
+    background: linear-gradient(to bottom right, var(--bg-secondary), var(--bg-tertiary));
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gauge {
+    position: relative;
+  }
+  
+  .gauge-sm {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .gauge-md {
+    width: 9rem;
+    height: 9rem;
+  }
+  
+  .gauge-lg {
+    width: 12rem;
+    height: 12rem;
+  }
+  
+  .gauge-body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-tertiary);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .gauge-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%);
+    transform-origin: center bottom;
+    transition: transform 1s ease-out;
+  }
+  
+  .gauge-cover {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    background-color: var(--bg-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gauge-value {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gauge-unit {
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+  
+  .usage-label {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  
+  /* Graph Styles */
+  .usage-graph-container {
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+  
+  .graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .live-status {
+    display: flex;
+    align-items: center;
+  }
+  
+  .live-status span {
+    color: var(--info);
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+  }
+  
+  .graph-container {
+    height: 220px;
+  }
+  
+  .chart-grid {
+    stroke: var(--bg-tertiary);
+  }
+  
+  .chart-axis {
+    stroke: var(--text-secondary);
+    fill: var(--text-secondary);
+    font-size: 0.75rem;
+  }
+  
+  .chart-line {
+    stroke: var(--info);
+  }
+  
+  /* Metric Card Styles */
+  .metric-card {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .metric-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .metric-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+  
+  .metric-value-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .metric-unit {
+    font-size: 0.75rem;
+    font-weight: normal;
+    opacity: 0.7;
+  }
+  
+  .metric-progress {
+    width: 100%;
+    height: 0.375rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 0.1875rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    border-radius: 0.1875rem;
+    transition: width 1s ease-out;
+  }
+  
+  /* Status Message */
+  .status-message {
+    margin-top: 1.5rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-message .icon {
+    margin-right: 0.75rem;
+    color: var(--primary);
+  }
+  
+  .status-title {
+    color: var(--primary-light);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  
+  .status-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    margin: 0.25rem 0 0 0;
+  }
+  
+  /* Status Colors */
+  .status-primary {
+    color: var(--primary);
+    background-color: var(--primary);
+  }
+  
+  .status-success {
+    color: var(--success);
+    background-color: var(--success);
+  }
+  
+  .status-warning {
+    color: var(--warning);
+    background-color: var(--warning);
+  }
+  
+  .status-danger {
+    color: var(--danger);
+    background-color: var(--danger);
+  }
+  
+  .status-info {
+    color: var(--info);
+    background-color: var(--info);
+  }
+  
+  .status-accent {
+    color: var(--accent);
+    background-color: var(--accent);
+  }
+  
+  /* Icon Sizes */
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .icon-small {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  /* Section Titles */
+  .section-title {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0 0 0.75rem 0;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .monitor-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .usage-gauge-container {
+      margin-bottom: 1.5rem;
+    }
+    
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+  }
