@@ -5,15 +5,15 @@ const Dashboard = () => {
   // Mock data for demonstration
   const systemData = {
     cpu: {
-      usage: 42,
-      temperature: 65,
+      usage: 10,
+      temperature: 50,
       cores: 8,
       frequency: 3.2
     },
     memory: {
-      used: 12.4,
+      used: 8.7,
       total: 16.0,
-      percentage: 77
+      percentage: 54
     },
     fans: {
       main: 1800,
@@ -22,14 +22,9 @@ const Dashboard = () => {
     },
     storage: {
       ssd: {
-        used: 234,
-        total: 500,
-        percentage: 47
-      },
-      hdd: {
-        used: 1.2,
-        total: 2.0,
-        percentage: 60
+        used: 130,
+        total: 1,
+        percentage: 13
       }
     },
     network: {
@@ -167,7 +162,7 @@ const Dashboard = () => {
             <div className="storage-device">
               <div className="storage-label">
                 <span className="device-name">SSD</span>
-                <span className="device-capacity">{systemData.storage.ssd.used} GB / {systemData.storage.ssd.total} GB</span>
+                <span className="device-capacity">{systemData.storage.ssd.used} GB / {systemData.storage.ssd.total} TB </span>
               </div>
               <div className="progress-container">
                 <div className="progress-bar">
@@ -177,22 +172,6 @@ const Dashboard = () => {
                   ></div>
                 </div>
                 <div className="progress-label">{systemData.storage.ssd.percentage}%</div>
-              </div>
-            </div>
-            
-            <div className="storage-device">
-              <div className="storage-label">
-                <span className="device-name">HDD</span>
-                <span className="device-capacity">{systemData.storage.hdd.used} TB / {systemData.storage.hdd.total} TB</span>
-              </div>
-              <div className="progress-container">
-                <div className="progress-bar">
-                  <div 
-                    className={`progress-fill ${systemData.storage.hdd.percentage > 80 ? 'warning' : 'normal'}`} 
-                    style={{width: `${systemData.storage.hdd.percentage}%`}}
-                  ></div>
-                </div>
-                <div className="progress-label">{systemData.storage.hdd.percentage}%</div>
               </div>
             </div>
           </div>
