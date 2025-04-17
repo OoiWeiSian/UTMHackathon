@@ -23,7 +23,7 @@ const Dashboard = () => {
     storage: {
       ssd: {
         used: 130,
-        total: 1,
+        total: 1024,
         percentage: 13
       }
     },
@@ -162,7 +162,7 @@ const Dashboard = () => {
             <div className="storage-device">
               <div className="storage-label">
                 <span className="device-name">SSD</span>
-                <span className="device-capacity">{systemData.storage.ssd.used} GB / {systemData.storage.ssd.total} TB </span>
+                <span className="device-capacity">{systemData.storage.ssd.used} GB / {systemData.storage.ssd.total} GB </span>
               </div>
               <div className="progress-container">
                 <div className="progress-bar">
