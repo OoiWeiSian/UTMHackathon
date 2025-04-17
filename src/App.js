@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import FanProfile from './components/FanProfile/FanProfile';
 import CpuLoad from './components/CpuLoad/CpuLoad';
 import MemoryStorage from './components/MemoryStorage/MemoryStorage';
+import GamePerformance from './components/GamePerformance/GamePerformance';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import './App.css';
 
@@ -12,11 +13,12 @@ const views = {
   dashboard: <Dashboard />,
   fan: <FanProfile />,
   cpu: <CpuLoad />,
-  memory: <MemoryStorage />
+  memory: <MemoryStorage />,
+  game: <GamePerformance />
 };
 
 function App() {
-  const [activeView, setActiveView] = useState('dashboard'); // Changed to dashboard as default
+  const [activeView, setActiveView] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -42,6 +44,7 @@ function App() {
               {activeView === 'fan' && 'Fan Profile'}
               {activeView === 'cpu' && 'CPU Performance'}
               {activeView === 'memory' && 'Memory & Storage'}
+              {activeView === 'game' && 'Game Performance'}
             </h1>
             <ThemeToggle />
           </div>

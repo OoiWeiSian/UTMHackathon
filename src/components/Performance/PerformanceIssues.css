@@ -1,0 +1,279 @@
+.performance-issues-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--card-bg, #1f2937);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .performance-issues-container.healthy {
+    border: 1px solid var(--success-color-muted, rgba(47, 179, 68, 0.3));
+  }
+  
+  .issues-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--issue-header-bg, rgba(71, 33, 45, 0.6));
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+  }
+  
+  .issues-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary, #e9ecef);
+  }
+  
+  .status-badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 16px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .status-badge.critical {
+    background-color: var(--critical-bg, rgba(255, 37, 37, 0.2));
+    color: var(--critical-color, #ff2525);
+  }
+  
+  .status-badge.warning {
+    background-color: var(--warning-bg, rgba(247, 195, 46, 0.2));
+    color: var(--warning-color, #f7c32e);
+  }
+  
+  .status-badge.normal {
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.2));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .issues-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+    gap: 1.25rem;
+  }
+  
+  .issues-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .issue-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    animation: fadeIn 0.3s ease;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .issue-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  .issue-item.critical {
+    background-color: var(--critical-bg-muted, rgba(255, 37, 37, 0.1));
+    border-left: 4px solid var(--critical-color, #ff2525);
+  }
+  
+  .issue-item.warning {
+    background-color: var(--warning-bg-muted, rgba(247, 195, 46, 0.1));
+    border-left: 4px solid var(--warning-color, #f7c32e);
+  }
+  
+  .issue-icon {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+  
+  .issue-icon.warning {
+    background-color: var(--warning-bg, rgba(247, 195, 46, 0.2));
+  }
+  
+  .issue-icon.temperature {
+    background-color: var(--critical-bg, rgba(255, 37, 37, 0.2));
+  }
+  
+  .issue-icon.memory {
+    background-color: var(--primary-bg, rgba(61, 139, 253, 0.2));
+  }
+  
+  .issue-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .issue-title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .issue-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary, #9ca3af);
+    line-height: 1.4;
+  }
+  
+  .recommendations-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background-color: var(--recommendation-bg, rgba(0, 0, 0, 0.2));
+    border-radius: 8px;
+  }
+  
+  .recommendations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendations-header h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary, #e9ecef);
+  }
+  
+  .recommendation-count {
+    background-color: var(--primary-color, #3d8bfd);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    height: 1.4rem;
+    min-width: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0 0.25rem;
+  }
+  
+  .recommendations-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    color: var(--text-secondary, #9ca3af);
+    line-height: 1.4;
+  }
+  
+  .recommendation-item .bullet {
+    color: var(--primary-color, #3d8bfd);
+    font-size: 1.2rem;
+    line-height: 0.9;
+  }
+  
+  .issues-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+  
+  .action-button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  
+  .action-button.primary {
+    background-color: var(--primary-color, #3d8bfd);
+    color: white;
+  }
+  
+  .action-button.primary:hover {
+    background-color: var(--primary-color-hover, #2a75f8);
+    transform: translateY(-1px);
+  }
+  
+  .action-button.secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #e9ecef);
+  }
+  
+  .action-button.secondary:hover {
+    background-color: var(--card-header-bg, rgba(0, 0, 0, 0.2));
+  }
+  
+  /* Healthy system display */
+  .no-issues {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .status-icon {
+    font-size: 2rem;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.2));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .status-message h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .status-message p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Add these additional color variables */
+  :root {
+    --critical-bg-muted: rgba(255, 37, 37, 0.05);
+    --warning-bg-muted: rgba(247, 195, 46, 0.05);
+    --success-color-muted: rgba(47, 179, 68, 0.3);
+    --primary-color-hover: #2a75f8;
+    --recommendation-bg: rgba(0, 0, 0, 0.2);
+    --issue-header-bg: rgba(71, 33, 45, 0.6);
+  }

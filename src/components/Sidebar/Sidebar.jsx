@@ -7,7 +7,8 @@ const Sidebar = ({ activeView, setActiveView, sidebarOpen, setSidebarOpen }) => 
     { id: 'dashboard', icon: '📊', label: 'Dashboard' },
     { id: 'cpu', icon: '💻', label: 'CPU Performance' },
     { id: 'memory', icon: '🧠', label: 'Memory & Storage' },
-    { id: 'fan', icon: '🌀', label: 'Fan Profile' }
+    { id: 'fan', icon: '🌀', label: 'Fan Profile' },
+    { id: 'game', icon: '🎮', label: 'Game Performance' }
   ];
 
   return (

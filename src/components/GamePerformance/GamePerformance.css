@@ -1,0 +1,856 @@
+.game-performance-container {
+    padding: 1.5rem;
+    height: 100%;
+    overflow-y: auto;
+    color: var(--text-primary, #e9ecef);
+    background-color: var(--app-bg, #121212);
+  }
+  
+  /* Game Selection Section */
+  .game-selection {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .game-selector, .performance-selector {
+    background-color: var(--card-bg, #1f2937);
+    border-radius: 8px;
+    padding: 1.25rem;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+  }
+  
+  .game-selector h3, .performance-selector h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--heading-color, #f3f4f6);
+  }
+  
+  .game-options {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .game-option {
+    padding: 0.75rem 1rem;
+    background-color: var(--card-header-bg, rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .game-option:hover {
+    background-color: var(--card-header-bg-hover, rgba(0, 0, 0, 0.3));
+  }
+  
+  .game-option.active {
+    border-color: var(--primary-color, #3d8bfd);
+    background-color: var(--primary-color-bg, rgba(61, 139, 253, 0.1));
+  }
+  
+  .game-icon {
+    font-size: 1.25rem;
+  }
+  
+  .game-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .performance-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .performance-option {
+    padding: 1rem;
+    background-color: var(--card-header-bg, rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    position: relative;
+  }
+  
+  .performance-option:hover {
+    background-color: var(--card-header-bg-hover, rgba(0, 0, 0, 0.3));
+  }
+  
+  .performance-option.active {
+    border-color: var(--primary-color, #3d8bfd);
+    background-color: var(--primary-color-bg, rgba(61, 139, 253, 0.1));
+  }
+  
+  .mode-name {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .mode-description {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #9ca3af);
+    margin-bottom: 0.5rem;
+  }
+  
+  .power-indicator {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  
+  .power-indicator.saving {
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.1));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .power-indicator.consuming {
+    background-color: var(--warning-bg, rgba(247, 195, 46, 0.1));
+    color: var(--warning-color, #f7c32e);
+  }
+  
+  /* Game Performance Header */
+  .game-performance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  }
+  
+  .game-info h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--heading-color, #f3f4f6);
+  }
+  
+  .game-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .game-details span {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--tag-bg, rgba(255, 255, 255, 0.05));
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  
+  .session-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .mode-badge {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mode-indicator {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 16px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  
+  .mode-indicator.eco {
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.1));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .mode-indicator.performance {
+    background-color: var(--danger-bg, rgba(227, 93, 106, 0.1));
+    color: var(--danger-color, #e35d6a);
+  }
+  
+  .mode-indicator.balanced {
+    background-color: var(--primary-bg, rgba(61, 139, 253, 0.1));
+    color: var(--primary-color, #3d8bfd);
+  }
+  
+  .session-time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .session-time .label {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .session-time .value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+  }
+  
+  /* Performance Grid */
+  .performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  
+  /* Make FPS widget take up 2 columns */
+  .fps-widget {
+    grid-column: span 2;
+  }
+  
+  .performance-widget {
+    background-color: var(--card-bg, #1f2937);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--card-header-bg, rgba(0, 0, 0, 0.2));
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+  }
+  
+  .widget-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .widget-content {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* FPS Widget Styles */
+  .fps-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  
+  .fps-value.high {
+    color: var(--success-color, #2fb344);
+  }
+  
+  .fps-value.medium {
+    color: var(--primary-color, #3d8bfd);
+  }
+  
+  .fps-value.low {
+    color: var(--warning-color, #f7c32e);
+  }
+  
+  .fps-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .fps-stats .stat {
+    text-align: center;
+  }
+  
+  .stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary, #9ca3af);
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+  }
+  
+  .fps-graph-container {
+    flex: 1;
+    height: 120px;
+    position: relative;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .fps-graph {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    gap: 2px;
+  }
+  
+  .fps-bar-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .fps-bar {
+    width: 100%;
+    background-color: var(--primary-color, #3d8bfd);
+    transition: height 0.2s ease;
+    position: relative;
+  }
+  
+  .fps-bar.good {
+    background-color: var(--success-color, #2fb344);
+  }
+  
+  .fps-bar.average {
+    background-color: var(--warning-color, #f7c32e);
+  }
+  
+  .fps-bar.bad {
+    background-color: var(--danger-color, #e35d6a);
+  }
+  
+  .fps-bar:hover::after {
+    content: attr(data-value);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--tooltip-bg, rgba(0, 0, 0, 0.8));
+    color: var(--tooltip-text, #fff);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  
+  /* Frame Time Widget */
+  .frame-time-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color, #3d8bfd);
+  }
+  
+  .frame-time-table {
+    margin-top: 0.5rem;
+  }
+  
+  .frame-time-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+  }
+  
+  .frame-time-row:last-child {
+    border-bottom: none;
+  }
+  
+  .frame-time-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .frame-time-value {
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+    font-size: 0.9rem;
+  }
+  
+  /* GPU and CPU Widget Styles */
+  .gpu-model, .cpu-model {
+    font-size: 0.8rem;
+    max-width: 50%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .gpu-metrics, .cpu-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .gpu-metric, .cpu-metric {
+    position: relative;
+  }
+  
+  .metric-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #9ca3af);
+    margin-bottom: 0.5rem;
+  }
+  
+  .metric-gauge {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .circular-gauge {
+    height: 60px;
+    width: 60px;
+    transform: rotate(-90deg);
+  }
+  
+  .gauge-bg {
+    fill: none;
+    stroke: var(--progress-bg, #374151);
+    stroke-width: 2.8;
+  }
+  
+  .gauge-fill {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke: var(--primary-color, #3d8bfd);
+    transition: stroke-dasharray 0.3s ease;
+  }
+  
+  .temperature .gauge-fill {
+    stroke: var(--success-color, #2fb344);
+  }
+  
+  .temperature .gauge-fill[stroke-dasharray^="7"], 
+  .temperature .gauge-fill[stroke-dasharray^="8"] {
+    stroke: var(--warning-color, #f7c32e);
+  }
+  
+  .temperature .gauge-fill[stroke-dasharray^="9"] {
+    stroke: var(--danger-color, #e35d6a);
+  }
+  
+  .gauge-text {
+    fill: var(--text-primary, #e9ecef);
+    font-size: 0.35rem;
+    font-weight: 600;
+    text-anchor: middle;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+    transform: rotate(90deg);
+    transform-origin: center;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--progress-bg, #374151);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: var(--primary-color, #3d8bfd);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-fill.high {
+    background-color: var(--warning-color, #f7c32e);
+  }
+  
+  .gpu-secondary-metrics, .cpu-secondary-metrics {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+  }
+  
+  .secondary-metric {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .secondary-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .secondary-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  /* Network Widget */
+  .ping-value {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .ping {
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+  }
+  
+  .ping.good {
+    color: var(--success-color, #2fb344);
+  }
+  
+  .ping.average {
+    color: var(--warning-color, #f7c32e);
+  }
+  
+  .ping.bad {
+    color: var(--danger-color, #e35d6a);
+  }
+  
+  .network-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .network-metric {
+    padding: 0.75rem;
+    background-color: var(--metric-bg, rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .network-metric:last-child {
+    grid-column: span 2;
+  }
+  
+  .network-metric .metric-label {
+    margin-bottom: 0.25rem;
+  }
+  
+  .network-metric .metric-value {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  /* Power Efficiency Widget */
+  .power-badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 16px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  
+  .power-badge.saving {
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.1));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .power-badge.consuming {
+    background-color: var(--warning-bg, rgba(247, 195, 46, 0.1));
+    color: var(--warning-color, #f7c32e);
+  }
+  
+  .power-efficiency-chart {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .efficiency-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .efficiency-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .efficiency-gauge {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .efficiency-indicator {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  
+  .efficiency-indicator.efficient {
+    background-color: var(--success-bg, rgba(47, 179, 68, 0.1));
+    color: var(--success-color, #2fb344);
+  }
+  
+  .efficiency-indicator.performance {
+    background-color: var(--danger-bg, rgba(227, 93, 106, 0.1));
+    color: var(--danger-color, #e35d6a);
+  }
+  
+  .efficiency-indicator.balanced {
+    background-color: var(--primary-bg, rgba(61, 139, 253, 0.1));
+    color: var(--primary-color, #3d8bfd);
+  }
+  
+  .total-power {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .power-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .power-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1200px) {
+    .performance-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .fps-widget {
+      grid-column: span 1;
+    }
+    
+    .game-selection {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .performance-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .game-performance-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .session-info {
+      text-align: left;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .session-time {
+      align-items: flex-start;
+    }
+    
+    .game-options {
+      flex-direction: column;
+    }
+  }
+  
+  /* Add dark theme color variables with extended set for new components */
+  :root {
+    --app-bg: #121212;
+    --card-bg: #1f2937;
+    --card-header-bg: rgba(0, 0, 0, 0.2);
+    --card-header-bg-hover: rgba(0, 0, 0, 0.3);
+    --border-color: rgba(255, 255, 255, 0.05);
+    --text-primary: #e9ecef;
+    --text-secondary: #9ca3af;
+    --heading-color: #f3f4f6;
+    --primary-color: #3d8bfd;
+    --primary-color-bg: rgba(61, 139, 253, 0.1);
+    --success-color: #2fb344;
+    --success-bg: rgba(47, 179, 68, 0.1);
+    --warning-color: #f7c32e;
+    --warning-bg: rgba(247, 195, 46, 0.1);
+    --danger-color: #e35d6a;
+    --danger-bg: rgba(227, 93, 106, 0.1);
+    --progress-bg: #374151;
+    --metric-bg: rgba(0, 0, 0, 0.2);
+    --tooltip-bg: rgba(0, 0, 0, 0.8);
+    --tooltip-text: #fff;
+    --tag-bg: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Light theme colors with extended set */
+  [data-theme="light"] {
+    --app-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --card-header-bg: rgba(0, 0, 0, 0.02);
+    --card-header-bg-hover: rgba(0, 0, 0, 0.05);
+    --border-color: rgba(0, 0, 0, 0.05);
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --heading-color: #212529;
+    --primary-color: #0d6efd;
+    --primary-color-bg: rgba(13, 110, 253, 0.1);
+    --success-color: #198754;
+    --success-bg: rgba(25, 135, 84, 0.1);
+    --warning-color: #ffc107;
+    --warning-bg: rgba(255, 193, 7, 0.1);
+    --danger-color: #dc3545;
+    --danger-bg: rgba(220, 53, 69, 0.1);
+    --progress-bg: #e9ecef;
+    --metric-bg: rgba(0, 0, 0, 0.03);
+    --tooltip-bg: rgba(33, 37, 41, 0.8);
+    --tooltip-text: #fff;
+    --tag-bg: rgba(0, 0, 0, 0.05);
+  }
+
+/* Add these new styles for the ultra-low FPS ranges and problem widget */
+
+.fps-bar.critical {
+    background-color: var(--critical-color, #ff2525);
+  }
+  
+  .fps-bar.low {
+    background-color: var(--danger-color, #e35d6a);
+  }
+  
+  .fps-value.critical {
+    color: var(--critical-color, #ff2525);
+    animation: pulse 2s infinite;
+  }
+  
+  .frame-time-value.critical {
+    color: var(--critical-color, #ff2525);
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Problem Widget */
+  .problem-widget .widget-header {
+    background-color: rgba(255, 37, 37, 0.2);
+  }
+  
+  .issues-badge {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 16px;
+    font-weight: 600;
+  }
+  
+  .issues-badge.critical {
+    background-color: var(--critical-bg, rgba(255, 37, 37, 0.2));
+    color: var(--critical-color, #ff2525);
+  }
+  
+  .issues-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .issue {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+  
+  .issue.critical {
+    background-color: var(--critical-bg, rgba(255, 37, 37, 0.1));
+  }
+  
+  .issue.warning {
+    background-color: var(--warning-bg, rgba(247, 195, 46, 0.1));
+  }
+  
+  .issue-icon {
+    font-size: 1.25rem;
+  }
+  
+  .issue-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .issue-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .issue-description {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #9ca3af);
+  }
+  
+  .issue-suggestions {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--metric-bg, rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+  }
+  
+  .issue-suggestions h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .issue-suggestions ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.85rem;
+  }
+  
+  .issue-suggestions li {
+    margin-bottom: 0.25rem;
+  }
+  
+  /* Add to root variables */
+  :root {
+    /* Add these new variables */
+    --critical-color: #ff2525;
+    --critical-bg: rgba(255, 37, 37, 0.1);
+  }
+  
+  [data-theme="light"] {
+    /* Add these new variables */
+    --critical-color: #dc0000;
+    --critical-bg: rgba(220, 0, 0, 0.1);
+  }
