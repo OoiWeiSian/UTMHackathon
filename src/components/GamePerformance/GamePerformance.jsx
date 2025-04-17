@@ -192,7 +192,7 @@ const GamePerformance = () => {
         history
       },
       gpu: {
-        model: 'NVIDIA RTX 4070',
+        model: 'NVIDIA GeForce RTX 3070',
         temperature: Math.max(45, baseData.gpu.temperature + tempAdjustment),
         fanSpeed: Math.min(100, Math.max(30, baseData.gpu.fanSpeed + fanAdjustment)),
         usage: Math.min(99, Math.max(10, baseData.gpu.usage + usageAdjustment)),
@@ -203,7 +203,7 @@ const GamePerformance = () => {
                (mode === 'performance' ? Math.round(baseData.gpu.power * 1.15) : baseData.gpu.power)
       },
       cpu: {
-        model: 'AMD Ryzen 5 4600H',
+        model: 'AMD Ryzen 9 5900HX',
         temperature: Math.max(45, baseData.cpu.temperature + tempAdjustment),
         usage: Math.min(99, Math.max(10, baseData.cpu.usage + usageAdjustment)),
         clockSpeed: mode === 'eco' ? 2.9 : (mode === 'performance' ? 4.0 : 3.7)
