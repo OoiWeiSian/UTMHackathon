@@ -4,7 +4,6 @@ import StorageChart from './StorageChart';
 import './MemoryStorage.css';
 
 const MemoryStorage = () => {
-  // Initial memory data
   const [memoryData, setMemoryData] = useState({
     total: 16.0,
     used: 8.7,
@@ -18,20 +17,17 @@ const MemoryStorage = () => {
     hardwareReserved: 0.677
   });
 
-  // Initial storage data
   const [storageData, setStorageData] = useState({
-    total: 952,
-    used: 130,
-    free: 822,
+    total: 1024, // 1TB in GB
+    used: 130, // fixed used value
+    free: 1024 - 130,
     readSpeed: 3500,
     writeSpeed: 2800
   });
 
-  // Historical data for memory and storage
   const [memoryHistory, setMemoryHistory] = useState([]);
   const [diskPerformanceHistory, setDiskPerformanceHistory] = useState([]);
 
-  // Update free memory value when used changes
   useEffect(() => {
     setMemoryData(prev => ({
       ...prev,
@@ -39,18 +35,15 @@ const MemoryStorage = () => {
     }));
   }, [memoryData.used]);
 
-  // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
       const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      
-      // Random fluctuation for memory data
+
       setMemoryData(prev => {
         const newUsed = Math.max(6, Math.min(15, prev.used + (Math.random() * 0.4 - 0.2)));
         const newCached = Math.max(3, Math.min(4.5, prev.cached + (Math.random() * 0.2 - 0.1)));
         const newCommitted = Math.max(10, Math.min(13, prev.committed + (Math.random() * 0.3 - 0.15)));
-        
-        // Update memory history
+
         setMemoryHistory(history => {
           const newHistory = [...history, {
             time: timestamp,
@@ -58,9 +51,9 @@ const MemoryStorage = () => {
             cached: parseFloat(newCached.toFixed(1)),
             free: parseFloat((prev.total - newUsed).toFixed(1))
           }];
-          return newHistory.slice(-20); // Keep last 20 points
+          return newHistory.slice(-20);
         });
-        
+
         return {
           ...prev,
           used: newUsed,
@@ -69,28 +62,25 @@ const MemoryStorage = () => {
         };
       });
 
-      // Random fluctuation for storage data
       setStorageData(prev => {
-        const newUsed = Math.max(125, Math.min(135, prev.used + (Math.random() * 0.2 - 0.1)));
         const newReadSpeed = Math.max(3000, Math.min(4000, prev.readSpeed + (Math.random() * 100 - 50)));
         const newWriteSpeed = Math.max(2500, Math.min(3000, prev.writeSpeed + (Math.random() * 80 - 40)));
-        
-        // Update disk performance history
+
         setDiskPerformanceHistory(history => {
           const newHistory = [...history, {
             time: timestamp,
             read: parseInt(newReadSpeed),
             write: parseInt(newWriteSpeed)
           }];
-          return newHistory.slice(-20); // Keep last 20 points
+          return newHistory.slice(-20);
         });
-        
+
         return {
           ...prev,
-          used: newUsed,
+          used: 130,
           readSpeed: newReadSpeed,
           writeSpeed: newWriteSpeed,
-          free: prev.total - newUsed
+          free: prev.total - 130
         };
       });
     }, 1500);
@@ -104,15 +94,11 @@ const MemoryStorage = () => {
         <h2>System Resources</h2>
         <p className="subtitle">Real-time monitoring of memory and storage utilization</p>
       </div>
-      
+
       <div className="resource-grid">
         <div className="resource-card memory-card">
           <h3>Memory Usage</h3>
-          <StorageChart 
-            used={memoryData.used} 
-            total={memoryData.total} 
-            color="#4361ee"
-          />
+          <StorageChart used={memoryData.used} total={memoryData.total} color="#4361ee" />
           <div className="resource-details">
             <div className="detail">
               <span className="detail-label">Total:</span>
@@ -138,8 +124,8 @@ const MemoryStorage = () => {
               </span>
             </div>
             <div className="composition-bar">
-              <div 
-                className="composition-progress" 
+              <div
+                className="composition-progress"
                 style={{
                   width: `${(memoryData.used / memoryData.total) * 100}%`,
                   background: '#4361ee'
@@ -154,8 +140,8 @@ const MemoryStorage = () => {
               </span>
             </div>
             <div className="composition-bar">
-              <div 
-                className="composition-progress" 
+              <div
+                className="composition-progress"
                 style={{
                   width: `${(memoryData.committed / memoryData.maxCommitted) * 100}%`,
                   background: '#7209b7'
@@ -170,8 +156,8 @@ const MemoryStorage = () => {
               </span>
             </div>
             <div className="composition-bar">
-              <div 
-                className="composition-progress" 
+              <div
+                className="composition-progress"
                 style={{
                   width: `${(memoryData.cached / memoryData.total) * 100}%`,
                   background: '#4895ef'
@@ -179,7 +165,7 @@ const MemoryStorage = () => {
               />
             </div>
           </div>
-          
+
           {memoryHistory.length > 1 && (
             <div className="chart-container">
               <ResponsiveContainer width="100%" height="100%">
@@ -187,7 +173,7 @@ const MemoryStorage = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                   <XAxis dataKey="time" stroke="#a0a0a0" tick={{ fontSize: 10 }} />
                   <YAxis stroke="#a0a0a0" tick={{ fontSize: 10 }} />
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{ backgroundColor: '#333', borderColor: '#555', fontSize: 12 }}
                     formatter={(value) => [`${value} GB`]}
                   />
@@ -200,14 +186,10 @@ const MemoryStorage = () => {
             </div>
           )}
         </div>
-        
+
         <div className="resource-card storage-card">
           <h3>Storage Usage</h3>
-          <StorageChart 
-            used={storageData.used} 
-            total={storageData.total} 
-            color="#f72585"
-          />
+          <StorageChart used={storageData.used} total={storageData.total} color="#f72585" />
           <div className="resource-details">
             <div className="detail">
               <span className="detail-label">Total:</span>
@@ -239,7 +221,7 @@ const MemoryStorage = () => {
               </span>
             </div>
           </div>
-          
+
           {diskPerformanceHistory.length > 1 && (
             <div className="chart-container">
               <ResponsiveContainer width="100%" height="100%">
@@ -247,7 +229,7 @@ const MemoryStorage = () => {
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                   <XAxis dataKey="time" stroke="#a0a0a0" tick={{ fontSize: 10 }} />
                   <YAxis stroke="#a0a0a0" tick={{ fontSize: 10 }} />
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{ backgroundColor: '#333', borderColor: '#555', fontSize: 12 }}
                     formatter={(value) => [`${value} MB/s`]}
                   />
@@ -260,7 +242,7 @@ const MemoryStorage = () => {
           )}
         </div>
       </div>
-      
+
       <div className="system-info">
         <div className="info-chip">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -276,12 +258,11 @@ const MemoryStorage = () => {
           16GB DDR5 RAM @ 3200 MT/s
         </div>
         <div className="info-chip">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M4 5H20C20.5523 5 21 5.44772 21 6V18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18V6C3 5.44772 3.44772 5 4 5ZM4 6V18H20V6H4ZM5 8H7V10H5V8ZM9 8H11V10H9V8ZM13 8H15V10H13V8ZM17 8H19V10H17V8ZM5 12H7V14H5V12ZM9 12H11V14H9V12ZM13 12H15V14H13V12ZM17 12H19V14H17V12Z"/>
-  </svg>
-  1TB NVMe SSD
-</div>
-
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 5H20C20.5523 5 21 5.44772 21 6V18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18V6C3 5.44772 3.44772 5 4 5ZM4 6V18H20V6H4ZM5 8H7V10H5V8ZM9 8H11V10H9V8ZM13 8H15V10H13V8ZM17 8H19V10H17V8ZM5 12H7V14H5V12ZM9 12H11V14H9V12ZM13 12H15V14H13V12ZM17 12H19V14H17V12Z"/>
+          </svg>
+          1TB NVMe SSD
+        </div>
       </div>
     </div>
   );
