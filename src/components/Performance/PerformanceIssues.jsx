@@ -140,13 +140,39 @@ const PerformanceIssues = ({ performanceData }) => {
   const renderIcon = (iconType) => {
     switch (iconType) {
       case 'warning':
-        return <i className="issue-icon warning">⚠️</i>;
+        return (
+          <div className="icon-container warning">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L1 21h22L12 2zm0 4l7.53 13H4.47L12 6zm-1 3v6h2V9h-2zm0 7v2h2v-2h-2z"/>
+            </svg>
+          </div>
+        );
       case 'temperature':
-        return <i className="issue-icon temperature">🔥</i>;
+        return (
+          <div className="icon-container temperature">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 15.28V5c0-.55-.45-1-1-1s-1 .45-1 1v10.28c-1.16.41-2 1.51-2 2.81 0 1.66 1.34 3 3 3s3-1.34 3-3c0-1.3-.84-2.4-2-2.81z"/>
+              <path d="M13 15.28V5c0-.55-.45-1-1-1s-1 .45-1 1v10.28c-1.16.41-2 1.51-2 2.81 0 1.66 1.34 3 3 3s3-1.34 3-3c0-1.3-.84-2.4-2-2.81zm-1 4.72c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </svg>
+          </div>
+        );
       case 'memory':
-        return <i className="issue-icon memory">📊</i>;
+        return (
+          <div className="icon-container memory">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 2v20h20V2H2zm18 18H4V4h16v16z"/>
+              <path d="M6 6h4v4H6zm8 0h4v4h-4zM6 14h4v4H6zm8 0h4v4h-4z"/>
+            </svg>
+          </div>
+        );
       default:
-        return <i className="issue-icon warning">⚠️</i>;
+        return (
+          <div className="icon-container warning">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L1 21h22L12 2zm0 4l7.53 13H4.47L12 6zm-1 3v6h2V9h-2zm0 7v2h2v-2h-2z"/>
+            </svg>
+          </div>
+        );
     }
   };
   
@@ -188,8 +214,6 @@ const PerformanceIssues = ({ performanceData }) => {
             ))}
           </ul>
         </div>
-        
-        {/* Removed the issues-footer div containing the buttons */}
       </div>
     </div>
   );
