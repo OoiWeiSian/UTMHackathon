@@ -4,17 +4,39 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
 
 ---
 
-## 📊 Features
+## 🚀 Key Features
 
-- **CPU Performance Monitoring**
-  - Live CPU usage percentage
-  - Frequency and voltage readings
-  - Real-time temperature tracking
-- **Memory & Storage Overview**
-  - RAM frequency display
-  - *(Storage monitoring coming soon!)*
-- **Fan Profile**
-  - *(Future feature: Monitor and control fan speeds)*
+### 🧠 CPU Performance Monitoring
+- Live CPU usage (%)
+- Real-time frequency and voltage
+- Temperature tracking (°C)
+
+### 📊 Memory & Storage Overview
+- RAM usage, frequency, and compression stats
+- Cached & committed memory tracking
+- Storage usage (total, used, free)
+- Read/write speed graph
+
+### 🌀 Fan Profile Management
+- Preset modes: Whisper / Standard / Performance / Turbo
+- Custom fan speed, temperature threshold, and response time
+- Power usage & noise level shown per mode
+
+### 🎮 Game Performance Insights
+- Per-game optimisation (Cyberpunk 2077, Apex, CS2, LoL)
+- Performance Modes: Balanced, Eco, High
+- Live FPS graph (min / avg / max)
+- Frame time stats
+- GPU/CPU temperature & usage tracking
+- VRAM usage
+- Network performance (ping, bandwidth)
+- Alerts for:
+  - Critical FPS drops
+  - Extreme frame times
+- Auto-suggestions:
+  - Reduce in-game settings
+  - Check/update drivers
+
 
 ---
 ## Screenshots
@@ -56,6 +78,21 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
 - Goh Jing Yang  
 - Tay Shun Wei  
 - Ooi Wei Sian  
-- Lin Chong Hui  
+- Lin Chong Hui
+
+  ---
+
+## 🛠️ Technologies
+
+- React
+- Context API (for theming)
+- Hooks (`useState`, `useContext`)
+- CSS Modules / Global styling
+
+---
+
+## 📃 License
+
+MIT License
 
 
