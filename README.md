@@ -37,6 +37,36 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
   - Reduce in-game settings
   - Check/update drivers
 
+---
+## ⚙️ Project Setup
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/system-performance-dashboard.git
+cd system-performance-dashboard
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm start
+```
+
+The app will be running at:  
+[http://localhost:3000](http://localhost:3000)
+
+
+## 🏗️ Build for Production
+
+```bash
+npm run build
+```
 
 ---
 ## Screenshots
