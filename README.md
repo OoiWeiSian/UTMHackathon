@@ -80,7 +80,7 @@ A real-time system monitoring tool designed to track CPU performance, memory sta
 - Ooi Wei Sian  
 - Lin Chong Hui
 
-  ---
+---
 
 ## 🛠️ Technologies
 
